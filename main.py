@@ -1,6 +1,6 @@
 
 
-board = [[0, 1, 3, 4, 5, 6, 7, 8, 9],
+board = [[1, 2, 3, 4, 5, 6, 7, 8, 9],
          [2, 3, 4, 5, 6, 7, 8, 9, 1],
          [3, 4, 5, 6, 7, 8, 9, 1, 2],
          [4, 5, 6, 7, 8, 9, 1, 2, 3],
@@ -31,7 +31,6 @@ def renderBoard():
 def checkRow(rowNum):
     #Loop through the row, adding each cell to a list. Before adding check to see if it is already in the list
     compare = []
-
     
     for x in range(9):
         for i in compare:
@@ -39,11 +38,22 @@ def checkRow(rowNum):
                 return False
             
         compare.append(board[rowNum][x])
+    return True
+
+def checkColumn(colNum):
+    compare = []
+    
+    for y in range(9):
+        for i in compare:
+            if i == board[y][colNum]:
+                return False
+            
+        compare.append(board[y][colNum])
 
     return True
 
-def checkColumn():
-    pass
+
+
 def checkSquare():
     pass
 
@@ -51,6 +61,12 @@ def checkSquare():
 
 renderBoard()
 
+if checkColumn(0):
+    print("the column is fine")
+else:
+    print("the column is not fine")
+
+    
 if checkRow(0):
     print("the line is fine")
 else:
