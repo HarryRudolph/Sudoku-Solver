@@ -1,6 +1,6 @@
 
 
-board = [[1, 2, 3, 4, 5, 6, 7, 8, 9],
+board = [[0, 1, 3, 4, 5, 6, 7, 8, 9],
          [2, 3, 4, 5, 6, 7, 8, 9, 1],
          [3, 4, 5, 6, 7, 8, 9, 1, 2],
          [4, 5, 6, 7, 8, 9, 1, 2, 3],
@@ -20,18 +20,28 @@ def renderBoard():
                 print(" | ", end = '')
             else:
                 print(" ", end = '')
-                
 
             if (x == 8):
                 print()
-
 
         if (y == 2) or (y == 5):
             print("=====================")
     
 
-def checkRow():
-    pass
+def checkRow(rowNum):
+    #Loop through the row, adding each cell to a list. Before adding check to see if it is already in the list
+    compare = []
+
+    
+    for x in range(9):
+        for i in compare:
+            if i == board[rowNum][x]:
+                return False
+            
+        compare.append(board[rowNum][x])
+
+    return True
+
 def checkColumn():
     pass
 def checkSquare():
@@ -40,3 +50,8 @@ def checkSquare():
 
 
 renderBoard()
+
+if checkRow(0):
+    print("the line is fine")
+else:
+    print("the line is not fine")
