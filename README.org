@@ -1,3 +1,2 @@
 * Console Sudoku
 A basic sudoko game currently in the command line.
-
