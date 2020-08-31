@@ -1,4 +1,14 @@
-clear = "\n" *100
+import pygame
+
+width = 500
+height = 700
+screen = pygame.display.set_mode((width, height))
+
+title = "Sudoku"
+
+running = True
+
+pygame.display.set_caption(title)
 
 
 board = [[0, 0, 0, 0, 0, 7, 0, 0, 0],
@@ -86,7 +96,16 @@ def solve():
                 return
     renderBoard()
 
-print(clear)
 renderBoard()
 print("Now solved:")
 solve()
+
+
+
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    pygame.display.flip()
+
