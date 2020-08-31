@@ -1,4 +1,6 @@
 import pygame
+pygame.init()
+
 
 width = 600
 height = 800
@@ -9,6 +11,21 @@ running = True
 
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption(title)
+
+font = pygame.font.SysFont("comicsans", 50)
+
+#x0, y0 is top left
+    
+gridx0 = 75
+gridx1 = 525
+gridy0 = 0
+gridy1 = 450
+
+xScale = 50
+yScale = 50
+
+
+
 
 
 board = [[0, 0, 0, 0, 0, 7, 0, 0, 0],
@@ -38,7 +55,7 @@ def renderConsoleBoard():
         for x in range(9):
             print(board[y][x], end = '')
 
-            if (x == 2) or (x ==5):
+            if (x == 2) or (x == 5):
                 print(" | ", end = '')
             else:
                 print(" ", end = '')
@@ -101,22 +118,12 @@ def solve():
 
 
 def renderGrid():
-    #x0, y0 is top left
-    
-    gridx0 = 75
-    gridx1 = 525
-    gridy0 = 0
-    gridy1 = 450
-
     #Grid Border
     pygame.draw.lines(screen, [0,0,0], True, [(gridx0, gridy0), (gridx1, gridy0)], 3)
     pygame.draw.lines(screen, [0,0,0], True, [(gridx0, gridy1), (gridx1, gridy1)], 3)
 
     pygame.draw.lines(screen, [0,0,0], True, [(gridx0, gridy0), (gridx0, gridy1)], 3)
     pygame.draw.lines(screen, [0,0,0], True, [(gridx1, gridy0), (gridx1, gridy1)], 3)
-    
-
-    
     
     #Render Boxes
     pygame.draw.lines(screen, [0,0,0], True, [(gridx0,150), (gridx1, 150)], 3)
@@ -136,12 +143,22 @@ def renderGrid():
         pygame.draw.lines(screen, [0, 0, 0], True,[(gridx0, yOffset), (gridx1, yOffset)], 1)
 
 
+def renderBoard():
+    for x in range(9):
+        for y in range(9):
+            temp = 0
+            temp = temp + board[x][y]
+            text = font.render(str(temp), 0, (0,0,0))
+            screen.blit(text, ((gridx0 + 15)+ (x * xScale), (gridy0 + 10) + (y *yScale)))
     
-pygame.init()
+
+
+    
 
 while running:
-    screen.fill((255, 0, 0))    
+    screen.fill((220, 221, 225))    
     renderGrid()
+    renderBoard()
     pygame.display.update()
     
     for event in pygame.event.get():
