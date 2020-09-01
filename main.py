@@ -1,4 +1,6 @@
 import pygame
+
+import solve
 pygame.init()
 
 
@@ -66,75 +68,8 @@ def renderConsoleBoard():
 
         if (y == 2) or (y == 5):
             print("=====================")
-    
 
-def possibleRow(rowNum, n):
-    for x in range(9):
-        if board[rowNum][x] == n:
-            return False
-
-    return True
-        
-
-def possibleColumn(colNum, n):
-    for y in range(9):
-        if board[y][colNum] == n:
-            return False
-
-    return True
-
-
-
-def possibleBox(colNum, rowNum, n):
-    boxX = (colNum // 3) * 3
-    boxY = (rowNum // 3) * 3
-    
-    
-    for y in range(boxY, boxY + 3):
-        for x in range(boxX, boxX + 3):
-            if board[y][x] == n:
-                return False
-    return True
-
-
-def possible(x, y, n):
-    if possibleColumn(x, n) and possibleRow(y, n) and possibleBox(x, y, n):
-        return True
-    return False
-
-
-def findEmpty():
-    for y in range(9):
-        for x in range(9):
-            if board[y][x] == 0:
-                return (y, x)
-    return False
-
-def solve():
-    empty = findEmpty() 
-
-    if not empty:
-        return True
-    else:
-        y, x = empty
-        
-        
-    for i in range(1, 10):
-        if possible(x, y, i):
-            board[y][x] = i
-            if solve():
-                return True
-                        
-            board[y][x] = 0
-
-    return False
-    renderConsoleBoard()
-    
-
-
-
-
-
+            
 def renderGrid():
     #Grid Border
     pygame.draw.lines(screen, [0,0,0], True, [(gridx0, gridy0), (gridx1, gridy0)], 3)
@@ -180,11 +115,11 @@ while running:
             running = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_1:
-                solve()
+                solve.solve(board)
             if event.key == pygame.K_2:
                 #board[0][0]= 9
                 renderConsoleBoard()
 
     pygame.display.update()
-    clock.tick(1)
+    clock.tick(30)
     
