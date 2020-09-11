@@ -1,6 +1,5 @@
 import pygame
 
-
 #x0, y0 is top left
     
 gridx0 = 75
@@ -10,8 +9,6 @@ gridy1 = 450
 
 xScale = 50
 yScale = 50
-
-
 
 def renderConsoleBoard(board):
     for y in range(9):
@@ -61,5 +58,9 @@ def renderBoard(board, screen, font):
         for x in range(9):
             temp = 0
             temp = temp + board[y][x]
-            text = font.render(str(temp), 0, (0,0,0))
-            screen.blit(text, ((gridx0 + 15)+ (x * xScale), (gridy0 + 10) + (y *yScale)))
+            if temp != 0: 
+                text = font.render(str(temp), 0, (0,0,0))
+                screen.blit(text, ((gridx0 + 15)+ (x * xScale), (gridy0 + 10) + (y *yScale)))
+    
+def renderChange(x, y, board, screen):
+    pygame.draw.rect(screen, (220, 221, 225), (gridx0 + (x*50), gridy0 + (y*50), 50, 50))

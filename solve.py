@@ -1,3 +1,8 @@
+import render
+
+import pygame
+
+timeDelay=500
 
 def possibleRow(board, rowNum, n):
     for x in range(9):
@@ -13,7 +18,6 @@ def possibleColumn(board, colNum, n):
             return False
 
     return True
-
 
 
 def possibleBox(board, colNum, rowNum, n):
@@ -40,22 +44,32 @@ def findEmpty(board):
                 return (y, x)
     return False
 
-def solve(board):
+def solve(board, screen, font):
     empty = findEmpty(board) 
 
     if not empty:
         return True
     else:
         y, x = empty
-        
+
+
+    
     for i in range(1, 10):
         if possible(board, x, y, i):
             board[y][x] = i
-            if solve(board):
+            render.renderChange(x, y, board, screen)
+            render.renderBoard(board, screen, font)
+            render.renderGrid(screen)
+            pygame.display.update()
+            pygame.time.delay(timeDelay)
+    
+            
+            if solve(board, screen, font):
                 return True
-                        
+
+            render.renderChange(x, y, board, screen)
+            render.renderGrid(screen)
+            pygame.display.update()
+            pygame.time.delay(timeDelay)
             board[y][x] = 0
-
     return False
-
-
