@@ -2,7 +2,7 @@ import render
 
 import pygame
 
-timeDelay=500
+timeDelay=0
 
 def possibleRow(board, rowNum, n):
     for x in range(9):
@@ -57,7 +57,7 @@ def solve(board, screen, font):
     for i in range(1, 10):
         if possible(board, x, y, i):
             board[y][x] = i
-            render.renderChange(x, y, board, screen)
+            render.renderChange(x, y, board, screen, True)
             render.renderBoard(board, screen, font)
             render.renderGrid(screen)
             pygame.display.update()
@@ -67,7 +67,7 @@ def solve(board, screen, font):
             if solve(board, screen, font):
                 return True
 
-            render.renderChange(x, y, board, screen)
+            render.renderChange(x, y, board, screen, False)
             render.renderGrid(screen)
             pygame.display.update()
             pygame.time.delay(timeDelay)
