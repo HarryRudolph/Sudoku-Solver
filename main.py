@@ -16,11 +16,11 @@ pygame.display.set_caption(title)
 clock = pygame.time.Clock()
 font = pygame.font.SysFont("comicsans", 50)
 
+inMainMenu = True
+inAboutMenu = False
 gameStarted = False
 
 mainMenuItems = ["start", "about", "exit"]
-
-# pygame.time.set_timer(updateBoard, 500)
 
 boardHard = [[0, 0, 0, 0, 0, 7, 0, 0, 0],
          [0, 0, 0, 8, 9, 0, 5, 0, 0],
@@ -43,21 +43,38 @@ board = [[0, 0, 3, 5, 6, 0, 4, 7, 0],
          [0, 0, 2, 0, 3, 4, 5, 0, 0]]
 
 screen.fill((220, 221, 225))
-render.renderMenu(screen, font, mainMenuItems)
 
 while running:
-    
+    if inMainMenu:
+        screen.fill((220, 221, 225))
+
+        render.renderMainMenu(screen, font, mainMenuItems)
+    if inAboutMenu:
+        screen.fill((220, 221, 225))
+
+        render.renderAboutMenu(screen, font)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_1:
                 if gameStarted:
                     solve.solve(board, screen, font)
                 gameStarted = True
             if event.key == pygame.K_2:
-                renderConsoleBoard()
+                inMainMenu = False
+                inAboutMenu = True
+            if event.key == pygame.K_ESCAPE:
+                if inMainMenu:
+                    running = false
+                    
+                inMainMenu = True
+                inAboutMenu = False
+                gameStarted = False
 
+                
 
 
     if gameStarted:

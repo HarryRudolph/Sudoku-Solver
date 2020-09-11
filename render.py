@@ -68,9 +68,14 @@ def renderChange(x, y, board, screen, works):
     else:
         pygame.draw.rect(screen, (232, 65, 24), (gridx0 + (x*50), gridy0 + (y*50), 50, 50))
         
-def renderMenu(screen, font, items):
+def renderMainMenu(screen, font, items):
     text = font.render("Sudoku Solver!", 0, (53, 59, 72))
     screen.blit(text, (100, 100))
 
     for i in range(len(items)):
-        text = font.render(items[i], 0,(53, 59, 72))
+        text = font.render(str(i+1) + ") " + items[i], 0,(53, 59, 72))
+        screen.blit(text, (50, 250 + (100*(i+1))))
+        
+def renderAboutMenu (screen, font):
+    text = font.render("made my Harry Rudolph", 0, (53, 59, 72))
+    screen.blit(text, (50, 250))
