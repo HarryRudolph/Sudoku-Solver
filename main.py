@@ -62,13 +62,14 @@ while running:
             if event.key == pygame.K_1:
                 if gameStarted:
                     solve.solve(board, screen, font)
+                inMainMenu = False
                 gameStarted = True
             if event.key == pygame.K_2:
                 inMainMenu = False
                 inAboutMenu = True
             if event.key == pygame.K_ESCAPE:
                 if inMainMenu:
-                    running = false
+                    running = False
                     
                 inMainMenu = True
                 inAboutMenu = False
