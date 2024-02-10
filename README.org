@@ -1,7 +1,0 @@
-* Console Sudoku
-A basic sudoko game currently in the command line.
-
-** Future ideas:
-1. Norvig's solution?
-2. Knuth's Dancing Links
-
